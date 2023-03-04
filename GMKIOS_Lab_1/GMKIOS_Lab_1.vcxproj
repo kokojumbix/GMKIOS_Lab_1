@@ -150,6 +150,10 @@
   <ItemGroup>
     <ClCompile Include="GMKIOS_Lab_1.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="D:\SFML-2.5.1\examples\shader\resources\blur.frag" />
+    <None Include="shader.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

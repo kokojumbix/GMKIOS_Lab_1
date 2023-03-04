@@ -19,4 +19,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="shader.glsl" />
+    <None Include="D:\SFML-2.5.1\examples\shader\resources\blur.frag" />
+  </ItemGroup>
 </Project>
