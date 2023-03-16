@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <SFML/Window/Mouse.hpp>
+#include <math.h>
 
 using namespace sf;
 
@@ -61,66 +62,87 @@ int main()
 		hexagon.setFillColor(Color::Transparent);
 		hexagon.setOutlineColor(Color::Black);
 		hexagon.setOutlineThickness(1.0f);
+		hexagon.setRotation(30.0f);
+
+		RectangleShape line_with_thickness(Vector2f(2560.f, 2.f));
+		line_with_thickness.rotate(60.f);
+		line_with_thickness.setFillColor(Color::Black);
+		line_with_thickness.setPosition(0, 0);
 
 
-		for (int i = 0; i < 1 + window.getSize().x / distance; i++) {
-			for (int y = 0; y < 2 + window.getSize().y / (distance / 1.5); y++) {
-				hexagon.setPosition(-circleradius + i * distance + ((y + 1) % 2 * distance / 2), y * circleradius * 1.5 - circleradius);
-
-				//if (hexagon.getGlobalBounds().contains(position.x, position.y) ) {
-				//	hexagon.setOutlineThickness(3.0f);
-				//}
-
+		for (int i = 0; i < 1 + window.getSize().x / (distance / 1.5); i++) {
+			for (int y = 0; y < 2 + window.getSize().y / (distance ); y++) {
+				hexagon.setPosition(-circleradius + i * circleradius * 1.5, y  * distance - circleradius + ((i + 1) % 2 * distance / 2));				
 				window.draw(hexagon);
 				hexagon.setOutlineThickness(1.0f);
 			}
 		}
 
-		hexagon.setRadius(35.0f);
-		hexagon.setOutlineThickness(5.0f);
+		for (int i = 0; i < 1 + window.getSize().x / (distance/3.0); i++) {
+			line_with_thickness.setPosition(i * circleradius  - 16 - circleradius, 0);
+			window.draw(line_with_thickness);
+			
+		}
 
-		for (int i = 0; i < 1 + window.getSize().x / distance; i++) {
-			for (int y = 0; y < 2 + window.getSize().y / (distance / 1.5); y++) {
+		for (int y = 0; y < 2 + window.getSize().y / (distance); y++) {
+			line_with_thickness.setPosition(0, y * distance + 1.5 * distance - 15 );
+			window.draw(line_with_thickness);
+		}
+		
+		line_with_thickness.rotate(30.f);
+		for (int i = 0; i < 1 + 2 * window.getSize().x / distance; i++) {
+			line_with_thickness.setPosition(i * circleradius * 1.5 - 30, 0);
+			window.draw(line_with_thickness);
+		}
 
-				hexagon.setPosition(-circleradius + i * distance + ((y + 1) % 2 * distance / 2) + (circleradius - hexagon.getRadius()), y * circleradius * 1.5 - circleradius + (circleradius - hexagon.getRadius()));
-				hexagon.setOutlineThickness(abs(sin(clock.getElapsedTime().asSeconds() + i / 6.0f + i / 4 + y / 6.0f) * 10) + 1);
-				window.draw(hexagon);
+		line_with_thickness.rotate(30.f);
+		for (int i = 0; i < 1 + window.getSize().x / (distance / 3.0); i++) {
+			line_with_thickness.setPosition(i * circleradius - 45 - circleradius, 0);
+			window.draw(line_with_thickness);
+
+		}
+
+		line_with_thickness.rotate(30.f);
+		for (int i = 0; i < 1 + window.getSize().x / (distance / 3.0); i++) {
+			line_with_thickness.setPosition(i * circleradius * 3 - 22 - circleradius, 0);
+			window.draw(line_with_thickness);
+
+		}
+
+		line_with_thickness.rotate(-150.f);
+		for (int y = 0; y < 2 + window.getSize().y / (distance / 2); y++) {
+			line_with_thickness.setPosition(0, y * distance / 2 - 26);
+			window.draw(line_with_thickness);
+		}
+
+		line_with_thickness.rotate(30.f);
+		for (int i = 0; i < 1 + window.getSize().x / (distance / 3.0); i++) {
+			line_with_thickness.setPosition(i * circleradius * 3 + 14, 0);
+			window.draw(line_with_thickness);
+		}
+
+		for (int y = 0; y < 2 + window.getSize().y / (distance); y++) {
+			line_with_thickness.setPosition(0, y * distance + 1.5 * distance - circleradius );
+			window.draw(line_with_thickness);
+		}
+
+
+		hexagon.setRadius(circleradius - 2);
+		hexagon.setFillColor(Color::White);
+		for (int i = 0; i < 1 + window.getSize().x / (distance / 1.5); i++) {
+			for (int y = 0; y < 2 + window.getSize().y / (distance); y++) {
+				if ((i+(y%2)*2 ) % 4 == 0) {
+					hexagon.setPosition(-circleradius + i * circleradius * 1.5 + 0.75, 2.75 + y * distance - circleradius + ((i + 1) % 2 * distance / 2));
+
+					window.draw(hexagon);
+					hexagon.setOutlineThickness(1.0f);
+				}
 			}
 		}
 
-		hexagon.setRadius(25.0f + sin(clock.getElapsedTime().asSeconds()) * 5);
-		hexagon.setOutlineThickness(1);
 
-		for (int i = 0; i < 1 + window.getSize().x / distance; i++) {
-			for (int y = 0; y < 2 + window.getSize().y / (distance / 1.5); y++) {
-				hexagon.setPosition(-circleradius + i * distance + ((y + 1) % 2 * distance / 2) + (circleradius - hexagon.getRadius()), y * circleradius * 1.5 - circleradius + (circleradius - hexagon.getRadius()));
-				hexagon.setOutlineThickness(abs(sin(clock.getElapsedTime().asSeconds() + i / 3 + y / 3)));
-				window.draw(hexagon);
-			}
-		}
-
-		hexagon.setRadius(10.0f);
-		hexagon.setOutlineThickness(5.0f);
-
-		for (int i = 0; i < 1 + window.getSize().x / distance; i++) {
-			for (int y = 0; y < 2 + window.getSize().y / (distance / 1.5); y++) {
-				hexagon.setPosition(-circleradius + i * distance + ((y + 1) % 2 * distance / 2) + (circleradius - hexagon.getRadius()), y * circleradius * 1.5 - circleradius + (circleradius - hexagon.getRadius()));
-				float thickness = circletouch(250.0f, position, hexagon.getPosition());
-				hexagon.setOutlineThickness(thickness);
-				window.draw(hexagon);
-			}
-		}
-
-		hexagon.setRadius(5.0f);
-		hexagon.setOutlineThickness(5.0f);
-
-
-		for (int i = 0; i < 1 + window.getSize().x / distance; i++) {
-			for (int y = 0; y < 2 + window.getSize().y / (distance / 1.5); y++) {
-				hexagon.setPosition(-circleradius + i * distance + ((y + 1) % 2 * distance / 2) + (circleradius - hexagon.getRadius()), y * circleradius * 1.5 - circleradius + (circleradius - hexagon.getRadius()));
-				window.draw(hexagon);
-			}
-		}
+		
+		
 
 
 
